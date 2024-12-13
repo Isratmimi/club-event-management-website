@@ -14,7 +14,8 @@ Any user, whether a student or club admin from the university, can access the sy
 
 5.Students, upon logging into their "Student Profile," can "JOIN CLUBS", "REGISTER FOR EVENTS," and view their club memberships and upcoming events. They can see all available clubs and choose which to join or registers any events at any time.
 
-#Technologies Used
+# Technologies Used:
+
 1.HTML/CSS
 2.Node.js
 3.Javascript

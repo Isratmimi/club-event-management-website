@@ -1,7 +1,7 @@
 # University club-event-management-system
 A web-based university club & event management system  for managing university clubs and events efficiently. It allows users to sign up, join clubs, RSVP for events, and view upcoming events. Admins can manage clubs, events, and users, while tracking budgets and processing funding requests. Key features include club memberships, event registration , club budget tracking and a dynamic user interface for managing club activities. 
 
-Features:
+# Features:
 Any user, whether a student or club admin from the university, can access the system via any browser. Users can view the homepage or introduction page without needing to register or log in.
 
 1.To use the system, users must register on the "SIGN UP" page, where they will provide role-based information (student, admin, etc.) to complete the registration process.
@@ -14,7 +14,7 @@ Any user, whether a student or club admin from the university, can access the sy
 
 5.Students, upon logging into their "Student Profile," can "JOIN CLUBS", "REGISTER FOR EVENTS," and view their club memberships and upcoming events. They can see all available clubs and choose which to join or registers any events at any time.
 
-Technologies Used
-HTML/CSS
-Node.js
-Javascript
+#Technologies Used
+1.HTML/CSS
+2.Node.js
+3.Javascript

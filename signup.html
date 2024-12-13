@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>University Club & Event Management</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="user-profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="signup-form">
+        <h2>Create an Account</h2>
+        <form id="signup-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <p class="login-link">Already have an account? <a href="login.html">Log In</a></p>
+    </section>
+
+    <script>
+        // Handle form submission
+        document.getElementById('signup-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, email, password }),
+                });
+
+                if (response.ok) {
+                    alert('Sign-up successful! Redirecting to login...');
+                    window.location.href = 'login.html';
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.error}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Unable to connect to the server. Please try again later.');
+            }
+        });
+    </script>
+
+    <footer>
+        <p>&copy; 2024 University Club & Event Management</p>
+    </footer>
+</body>
+</html>

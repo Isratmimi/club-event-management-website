@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Club Form</title>
+    <link rel="stylesheet" href="joinclub.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>University Club & Event Management</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h1>Join a Club</h1>
+        <form id="join-club-form">
+            <label for="club-id">Club ID:</label>
+            <input type="number" id="club-id" name="club_id" required>
+
+            <label for="user-id">User ID:</label>
+            <input type="number" id="user-id" name="user_id" required>
+
+            <label for="membership-type">Membership Type:</label>
+            <select id="membership-type" name="membership_type" required>
+                <option value="General">General</option>
+                <option value="Special">Special</option>
+            </select>
+
+            <button type="submit">Join Club</button>
+        </form>
+
+        <div id="result-message"></div>
+    </div>
+
+    <script>
+        document.getElementById('join-club-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const clubId = document.getElementById('club-id').value;
+            const userId = document.getElementById('user-id').value;
+            const membershipType = document.getElementById('membership-type').value;
+
+            // Send the data to the server
+            fetch('http://localhost:5000/api/join-club', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    club_id: clubId,
+                    user_id: userId,
+                    membership_type: membershipType
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultMessage = document.getElementById('result-message');
+                if (data.success) {
+                    resultMessage.innerHTML = `<p style="color: green;">You have successfully joined the club!</p>`;
+                } else {
+                    resultMessage.innerHTML = `<p style="color: red;">Error: ${data.message}</p>`;
+                }
+            })
+            .catch(error => {
+                console.error('Error joining club:', error);
+                document.getElementById('result-message').innerHTML = `<p style="color: red;">An error occurred while joining the club.</p>`;
+            });
+        });
+    </script>
+</body>
+</html>

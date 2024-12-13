@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Club</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Delete Club</h1>
+        <nav>
+            <ul>
+                <li><a href="admin-dashboard.html">Back to Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <form id="delete-club-form">
+            <label for="club-id">Club ID:</label>
+            <input type="text" id="club-id" name="club-id" required>
+
+            <button type="submit">Delete Club</button>
+        </form>
+    </section>
+
+    <script>
+        // Handle delete club form submission
+        document.getElementById('delete-club-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const clubId = document.getElementById('club-id').value;
+
+            try {
+                const response = await fetch(`http://localhost:5000/clubs/delete/${clubId}`, {
+                    method: 'DELETE',
+                });
+
+                if (response.ok) {
+                    alert('Club deleted successfully!');
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.error}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Unable to connect to the server. Please try again later.');
+            }
+        });
+    </script>
+</body>
+</html>
+
+<footer>
+        <p>&copy; 2024 University Club & Event Management</p>
+    </footer>
+    

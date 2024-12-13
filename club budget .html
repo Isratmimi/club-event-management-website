@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Budget Tracker & Funding Requests</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    <ul>
+        <li><a href="admin-dashboard.html">Home</a></li>
+        <li><a href="clubs.html">Clubs</a></li>
+    </ul>
+
+<div class="container">
+    <h1>Smart Club Budget Tracker & Funding Requests</h1>
+
+
+    <!-- Expense Entry Form -->
+    <form id="expenseForm">
+        <h2>Track Club Expenses</h2>
+        <label for="expenseType">Expense Type:</label>
+        <select id="expenseType" name="expenseType" required>
+            <option value="Event Cost">Event Cost</option>
+            <option value="Club Materials">Club Materials</option>
+            <option value="Miscellaneous">Miscellaneous</option>
+        </select>
+
+        <label for="expenseAmount">Amount (USD):</label>
+        <input type="number" id="expenseAmount" name="expenseAmount" required>
+
+        <label for="expenseDetails">Details:</label>
+        <textarea id="expenseDetails" name="expenseDetails" rows="4" placeholder="Describe the expense" required></textarea>
+
+        <button type="submit">Add Expense</button>
+    </form>
+
+    <!-- Budget Overview Section -->
+    <div class="budget-summary" id="budgetSummary">
+        <h2>Budget Overview</h2>
+        <h3>Total Budget: $20000</h3>
+        <h3>Total Expenses: $0</h3>
+        <h3>Remaining Budget: $10000</h3>
+    </div>
+
+    <!-- Funding Request Form -->
+    <form id="fundingRequestForm">
+        <h2>Request Funding from University</h2>
+
+        <label for="fundingAmount">Amount Requested (USD):</label>
+        <input type="number" id="fundingAmount" name="fundingAmount" required>
+
+        <label for="fundingPurpose">Purpose of Funding:</label>
+        <textarea id="fundingPurpose" name="fundingPurpose" rows="4" placeholder="Explain why funding is needed" required></textarea>
+
+        <button type="submit">Request Funding</button>
+    </form>
+</div>
+
+<script>
+    // Basic JavaScript to update budget overview
+    const expenseForm = document.getElementById('expenseForm');
+    const budgetSummary = document.getElementById('budgetSummary');
+    let totalExpenses = 0;
+    let totalBudget = 20000;  // Example starting budget
+
+    expenseForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
+        
+        totalExpenses += expenseAmount;
+        const remainingBudget = totalBudget - totalExpenses;
+
+        budgetSummary.innerHTML = `
+            <h2>Budget Overview</h2>
+            <h3>Total Budget: $${totalBudget}</h3>
+            <h3>Total Expenses: $${totalExpenses}</h3>
+            <h3>Remaining Budget: $${remainingBudget}</h3>
+        `;
+
+        expenseForm.reset();
+    });
+</script>
+
+</body>
+</html>

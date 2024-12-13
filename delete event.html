@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Event</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Delete Event</h1>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <div class="container">
+            <h2>Delete Event</h2>
+            <form id="deleteEventForm">
+                <label for="event_id">Event ID:</label>
+                <input type="number" id="event_id" name="event_id" required>
+
+                <button type="submit">Delete Event</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 University Club & Event Management</p>
+    </footer>
+
+    <script>
+        document.getElementById('deleteEventForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = {
+                event_id: document.getElementById('event_id').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/events/delete', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error deleting event:', error);
+            }
+        });
+    </script>
+</body>
+</html>

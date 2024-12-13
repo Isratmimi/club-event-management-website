@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>University Club & Event Management</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="register-form">
+        <h2>Register</h2>
+        <form id="registerForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <!-- Event ID is dynamically set based on the URL parameter -->
+            <input type="hidden" id="event_id" name="event_id">
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 University Club & Event Management</p>
+    </footer>
+
+
+        
+        <script>
+        // Get event_id from the query parameter in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const eventId = urlParams.get('event_id');
+        if (eventId) {
+            document.getElementById('event_id').value = eventId;
+        }
+
+        // Submit form data
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value,
+                event_id: document.getElementById('event_id').value
+            };
+            fetch('http://localhost:5000/api/register', {
+             method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                           },
+                       body: JSON.stringify(formData)
+                    })
+       
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    alert('Successfully registered for the event!');
+                    window.location.href = 'events.html';  // Redirect to the events page
+                }
+            })
+            .catch(error => {
+                alert('Error registering for the event.');
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

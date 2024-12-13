@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clubs</title>
+    <link rel="stylesheet" href="clubs.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>University Club & Event Management</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="clubs.html">Clubs</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="user-profile.html">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section></class="clubs-list">
+        <h2>Our Clubs</h2>
+        <div id="clubs-container">
+            <!-- Clubs will be dynamically loaded here -->
+            
+        </div>
+    </section>
+   
+    
+        <script>
+            // Fetch clubs from the backend and display them
+            document.addEventListener('DOMContentLoaded', async () => {
+                try {
+                    const response = await fetch('http://localhost:5000/clubs');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch clubs');
+                    }
+                    const clubs = await response.json();
+                    const clubsContainer = document.getElementById('clubs-container');
+                    
+    
+                    // Clear existing clubs
+                    clubsContainer.innerHTML = '';
+    
+                    // Display each club in a card format
+                    clubs.forEach(club => {
+                        const clubCard = document.createElement('div');
+                        clubCard.classList.add('club-card');
+                        clubCard.innerHTML = `
+                            <h3>${club.name}</h3>
+                            <p>${club.description}</p>
+                            <p class="join">Don't join this club yet? <a href="joinclub.html">join club</a></p>
+
+                            
+                            
+                        `;
+                        clubsContainer.appendChild(clubCard);
+                    });
+                
+    
+                } catch (error) {
+                    console.error('Error fetching clubs:', error);
+                    document.getElementById('clubs-container').innerHTML = '<p>Failed to load clubs. Please try again later.</p>';
+                }
+            });
+        </script>
+    
+        
+    
+    
+</script>
+</body>
+</html>
+<footer>
+    <p>&copy; 2024 University Club & Event Management</p>
+</footer>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Club</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    <header>
+        <h1>Create New Club</h1>
+        <nav>
+            <ul>
+                <li><a href="admin-dashboard.html">Back to Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <form id="create-club-form">
+            <label for="name">Club Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+
+            <!-- Hidden admin_id field (adjust to your logic to retrieve admin id dynamically) -->
+            <input type="hidden" id="admin_id" name="admin_id" value="1"> <!-- Example admin_id -->
+
+            <button type="submit">Create Club</button>
+        </form>
+    </section>
+
+    <script>
+        
+        document.getElementById('create-club-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const description = document.getElementById('description').value;
+    const admin_id = 1; // Add the appropriate admin_id here, based on your logged-in user or system
+
+    try {
+        const response = await fetch('http://localhost:5000/clubs/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, description, admin_id }),
+        });
+
+        if (response.ok) {
+            alert('Club created successfully!');
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.error}`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Unable to connect to the server. Please try again later.');
+    }
+});
+
+    </script>
+</body>
+</html>
+
+<footer>
+    <p>&copy; 2024 University Club & Event Management</p>
+</footer>

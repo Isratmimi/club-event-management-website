@@ -1,0 +1,88 @@
+/* Join Club Page */
+body {
+    background-image: url('gate.jpg'); 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.join-club-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.join-club-form label {
+    font-size: 1em;
+    margin-bottom: 5px;
+}
+
+.join-club-form select, .join-club-form button {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.join-club-form button {
+    background-color: #3e3a3a;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.join-club-form button:hover {
+    background-color: #323232;
+}
+
+/* Header and Navigation Styling */
+header {
+    background-color: #2d2d2d;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+header .logo h1 {
+    font-size: 2em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+    margin-top: 10px;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+.container {
+    flex: 1; /* This allows the content to take up available space */
+}
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Create Event</h1>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <h2>Create a New Event</h2>
+        <form id="createEventForm">
+            <label for="name">Event Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="date">Event Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="admin_id">Admin ID:</label>
+            <input type="number" id="admin_id" name="admin_id" required>
+
+            <label for="club_id">Club ID:</label>
+            <input type="number" id="club_id" name="club_id" required>
+
+            <button type="submit">Create Event</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 University Club & Event Management</p>
+    </footer>
+
+    <script>
+        document.getElementById('createEventForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                date: document.getElementById('date').value,
+                admin_id: document.getElementById('admin_id').value,
+                club_id: document.getElementById('club_id').value
+            };
+            
+              
+            try {
+                const response = await fetch('http://localhost:5000/api/events/create', {
+                method: 'POST',
+                     headers: { 'Content-Type': 'application/json' },
+                     body: JSON.stringify(formData)
+
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    alert(data.error);
+                }
+            } catch (error) {
+                console.error('Error creating event:', error);
+            }
+        });
+    </script>
+</body>
+</html>
